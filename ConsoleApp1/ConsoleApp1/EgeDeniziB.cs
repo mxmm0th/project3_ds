@@ -1,11 +1,15 @@
+using System;
+using System.Collections.Generic;
 
 public class EgeDeniziB
 {
     public string BalikAdi { get; set; }
+    public string Bilgi { get; set; }
     public KelimeAgaci KelimeAgaci { get; set; }
-
     public EgeDeniziB(string balikAdi, string bilgi)
     {
+
+        Bilgi = bilgi;
         BalikAdi = balikAdi;
         KelimeAgaci = new KelimeAgaci();
         foreach (var kelime in bilgi.Split(' '))
@@ -27,18 +31,9 @@ public class EgeDeniziB
         return BalikAdi;
     }
 
-    public static Dictionary<string, EgeDeniziB> CreateBalikDictionary(List<EgeDeniziB> baliklar)
-    {
-        Dictionary<string, EgeDeniziB> balikDictionary = new Dictionary<string, EgeDeniziB>();
+    public string getBalikbilgi(){
 
-        foreach (var balik in baliklar)
-        {
-            balikDictionary[balik.BalikAdi] = balik;
-        }
-
-        return balikDictionary;
+        return Bilgi;
     }
-
-    
-    
+         
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class BalikAgaci
 {
     private class Node
@@ -84,6 +87,12 @@ public class BalikAgaci
         return balikObjeleri;
     }
 
+    public Dictionary<string, string> CreateBalikDictionary()
+    {
+        Dictionary<string, string> balikDictionary = new Dictionary<string, string>();
+        InOrderTraversal(root, balikDictionary);
+        return balikDictionary;
+    }
 
     private void InOrderTraversal(Node node, List<EgeDeniziB> balikObjeleri)
     {
@@ -94,7 +103,12 @@ public class BalikAgaci
         InOrderTraversal(node.Sag, balikObjeleri);
     }
 
+    private void InOrderTraversal(Node node, Dictionary<string, string> balikDictionary)
+    {
+        if (node == null) return;
 
+        InOrderTraversal(node.Sol, balikDictionary);
+        balikDictionary[node.Balik.BalikAdi] = node.Balik.Bilgi;
+        InOrderTraversal(node.Sag, balikDictionary);
+    }
 }
-
-

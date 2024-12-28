@@ -22,6 +22,8 @@ class Program
             KelimeAgaci kelimeagac = new KelimeAgaci();
 
             var parcalar = line.Split(","+'"');
+            if (parcalar.Length < 3) continue; // Null check for array length
+
             string balikAdi = parcalar[1].Trim().Split(". ")[1].TrimEnd('"');// Fish Name sütunu
             string bilgi = parcalar[2].Trim();   // Description sütunu
             string[] kelimearray = bilgi.Split(" ");
@@ -31,6 +33,9 @@ class Program
 
                 kelimeagac.Ekle(cleanedStr);
             }
+            
+
+
             kelimeagac.InOrderListele();         //kelime ağacını yazdırma
             Console.WriteLine();
             Console.WriteLine("-----------------------");
@@ -45,20 +50,32 @@ class Program
 
 
 
-            EgeDeniziB balik = new EgeDeniziB(balikAdi, bilgi);
+            EgeDeniziB balik = new EgeDeniziB(balikAdi,bilgi);
+            
             balikAgaci.Ekle(balik);
             //kelimeagac.Ekle(balikAdi+"-->"+bilgi);
 
         }   
         //toplam derinlik
+
         Console.WriteLine("Toplam Derinlik:"+Totaldepth); 
         //ortalama derinlik
         Console.WriteLine("Ortalama Derinlik: "+Totaldepth/38);
         //node count ve balanced node count yazdır
         Console.WriteLine("Node Count: "+balikAgaci.GetNodeCount());
+  
+        // Hash table oluştur
+        var balikDictionary = balikAgaci.CreateBalikDictionary();
 
-        
-              while (true)
+        // Hash table print et  
+        // Console.WriteLine("Hash Table (Dictionary) Contents:");
+       
+        // foreach (var balikEntry in balikDictionary)
+        // {
+        //     Console.WriteLine("Key: " + balikEntry.Key + " Value---> " + balikEntry.Value);
+        // }
+
+        while (true)
         {
             Console.WriteLine("Başlangıç harfini girin (çıkmak için 'q' tuşuna basın): ");
             char baslangic = Console.ReadKey().KeyChar;
@@ -76,14 +93,50 @@ class Program
             EgeDeniziB.ListeleBaliklarArasinda(balikAgaci.GetBalikObjeleri(), baslangic, bitis);
         }
 
-        
+        // Yeni bilgi güncelleme işlemi
+        Console.WriteLine("Bilgisini güncellemek istediğiniz balığın adını girin: ");
+        string? balikAdiGuncelle = Console.ReadLine();
 
+        if (string.IsNullOrEmpty(balikAdiGuncelle))
+        {
+            Console.WriteLine("Balık adı boş olamaz.");
+            return;
+        }
+
+        Console.WriteLine("Yeni bilgiyi girin: ");
+        string? yeniBilgi = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(yeniBilgi))
+        {
+            Console.WriteLine("Yeni bilgi boş olamaz.");
+            return;
+        }
+
+        // Hash tablosunda güncelle
+        if (balikDictionary.ContainsKey(balikAdiGuncelle))
+        {
+            balikDictionary[balikAdiGuncelle] = yeniBilgi;
+            Console.WriteLine("Balık bilgisi güncellendi.");
+            Console.WriteLine("-------------------------");
+
+        }
+        else
+        {
+            Console.WriteLine("Balık bulunamadı.");
+
+            Console.WriteLine("-------------------------");
+
+        }
+        
+        // Güncellenmiş hash tablosunu yazdır
+        Console.WriteLine("Güncellenmiş Hash Table (Dictionary) Contents:");
+        foreach (var balikEntry in balikDictionary)
+        {
+            Console.WriteLine("Key: " + balikEntry.Key + " Value---> " + balikEntry.Value);
+            //cizgi yazdır
+            Console.WriteLine("--------------------------------");
+
+            
+        }
     }
-
-
-
-
-        
-        
-        
 }
