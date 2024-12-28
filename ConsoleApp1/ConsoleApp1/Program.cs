@@ -16,7 +16,13 @@ class Program
         int Totaldepth = 0;
 
         // CSV Dosyasını Oku
-        var lines = File.ReadAllLines("C://Users//90546//Desktop//project3_//ConsoleApp1//ConsoleApp1//balıklistesi.csv");
+        //file pathi baskaları tarafından kullanılabilir hale getir 
+        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+        // Combine the base directory with the relative path to the file
+        var filePath = Path.Combine(baseDirectory, "ConsoleApp1", "balıklistesi.csv");
+        var lines =  File.ReadAllLines(filePath);
+
         foreach (var line in lines)
         {
             if (line.StartsWith("\"Position\"")) continue; // Başlık satırını atla
@@ -121,17 +127,7 @@ class Program
             balikDictionary[balikAdiGuncelle] = yeniBilgi;
             Console.WriteLine("Balık bilgisi güncellendi.");
             Console.WriteLine("-------------------------");
-
-        }
-        else
-        {
-            Console.WriteLine("Balık bulunamadı.");
-
-            Console.WriteLine("-------------------------");
-
-        }
-        
-        // Güncellenmiş hash tablosunu yazdır
+                    // Güncellenmiş hash tablosunu yazdır
         Console.WriteLine("Güncellenmiş Hash Table (Dictionary) Contents:");
         foreach (var balikEntry in balikDictionary)
         {
@@ -142,6 +138,16 @@ class Program
             
         }
 
+        }
+        else
+        {
+            Console.WriteLine("Balık bulunamadı.");
+
+            Console.WriteLine("-------------------------");
+
+        }
+        
+
         // Max Heap oluştur
         PriorityQueue<string, string> maxHeap = new PriorityQueue<string, string>(Comparer<string>.Create((x, y) => y.CompareTo(x)));
 
@@ -150,17 +156,16 @@ class Program
         {
             maxHeap.Enqueue(balikEntry.Key, balikEntry.Key);
         }
-
+        Console.WriteLine("Max Heap Contents:");
         // Max Heap'ten balıkları sırayla çıkar ve yazdır   
-        Console.WriteLine("Max Heap Contents (Balık Adlarına Göre):");
-        while (maxHeap.Count > 0)
+        for (int i = 0; i < 3 && maxHeap.Count > 0; i++)
         {
-            string balikAdi = maxHeap.Dequeue();
-            Console.WriteLine("Balık Adı: " + balikAdi + " Bilgi: " + balikDictionary[balikAdi]);
-            //cizgi yazdır
-            Console.WriteLine("--------------------------------");
-        }
+            string fishName = maxHeap.Dequeue();
+            if (balikDictionary.TryGetValue(fishName, out string fishInfo))
+            {
+                Console.WriteLine($"Balık Adı: {fishName}, Bilgi: {fishInfo}");
+            }
+        }        
        
-        
     }
 }
