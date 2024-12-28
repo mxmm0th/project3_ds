@@ -134,6 +134,3 @@ public void Add(List<EgeDeniziB> baliklar)
         InOrderTraversal(node.Sag, balikDictionary);
     }
 }
-
-
-//Mami senin ben..
