@@ -149,7 +149,7 @@ class Program
             maxHeap.Enqueue(balikEntry.Key, balikEntry.Key);
         }
 
-        // Max Heap'ten balıkları sırayla çıkar ve yazdır
+        // Max Heap'ten balıkları sırayla çıkar ve yazdır   
         Console.WriteLine("Max Heap Contents (Balık Adlarına Göre):");
         while (maxHeap.Count > 0)
         {
