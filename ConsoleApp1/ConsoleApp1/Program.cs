@@ -134,7 +134,7 @@ class Program
         foreach (var balikEntry in balikDictionary)
         {
             Console.WriteLine("Key: " + balikEntry.Key + " Value---> " + balikEntry.Value);
-            //cizgi yazdır
+            //cizgi yazdır  
             Console.WriteLine("--------------------------------");
 
             
