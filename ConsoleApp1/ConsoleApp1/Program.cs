@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 class Program
 {
@@ -137,6 +138,25 @@ class Program
             Console.WriteLine("--------------------------------");
 
             
+        }
+
+        // Max Heap oluştur
+        PriorityQueue<string, string> maxHeap = new PriorityQueue<string, string>(Comparer<string>.Create((x, y) => y.CompareTo(x)));
+
+        // Balıkları Max Heap'e ekle
+        foreach (var balikEntry in balikDictionary)
+        {
+            maxHeap.Enqueue(balikEntry.Key, balikEntry.Key);
+        }
+
+        // Max Heap'ten balıkları sırayla çıkar ve yazdır
+        Console.WriteLine("Max Heap Contents (Balık Adlarına Göre):");
+        while (maxHeap.Count > 0)
+        {
+            string balikAdi = maxHeap.Dequeue();
+            Console.WriteLine("Balık Adı: " + balikAdi + " Bilgi: " + balikDictionary[balikAdi]);
+            //cizgi yazdır
+            Console.WriteLine("--------------------------------");
         }
     }
 }
