@@ -134,3 +134,6 @@ public void Add(List<EgeDeniziB> baliklar)
         InOrderTraversal(node.Sag, balikDictionary);
     }
 }
+
+
+// Batu senin ben...
