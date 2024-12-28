@@ -79,6 +79,28 @@ public class BalikAgaci
 
     //balk isimlerini ceken method getter
 
+public void Add(List<EgeDeniziB> baliklar)
+    {
+        baliklar.Sort((x, y) => string.Compare(x.BalikAdi, y.BalikAdi, StringComparison.Ordinal));
+        root = BuildBalancedTree(baliklar, 0, baliklar.Count - 1);
+    }
+
+    private Node BuildBalancedTree(List<EgeDeniziB> baliklar, int start, int end)
+    {
+        if (start > end)
+        {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        Node node = new Node(baliklar[mid])
+        {
+            Sol = BuildBalancedTree(baliklar, start, mid - 1),
+            Sag = BuildBalancedTree(baliklar, mid + 1, end)
+        };
+
+        return node;
+    }
 
       public List<EgeDeniziB> GetBalikObjeleri()
     {

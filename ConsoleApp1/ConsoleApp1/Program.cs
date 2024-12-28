@@ -11,6 +11,7 @@ class Program
     {
         BalikAgaci balikAgaci = new BalikAgaci();
         KelimeAgaci[] kelimeAgacları = new KelimeAgaci[38];
+        BalikAgaci dengeliBalikAgaci = new BalikAgaci();
 //toplam derinligi tanımla 
         int Totaldepth = 0;
 
@@ -75,7 +76,8 @@ class Program
         // {
         //     Console.WriteLine("Key: " + balikEntry.Key + " Value---> " + balikEntry.Value);
         // }
-
+        dengeliBalikAgaci.Add(balikAgaci.GetBalikObjeleri());
+        
         while (true)
         {
             Console.WriteLine("Başlangıç harfini girin (çıkmak için 'q' tuşuna basın): ");
@@ -158,5 +160,7 @@ class Program
             //cizgi yazdır
             Console.WriteLine("--------------------------------");
         }
+       
+        
     }
 }
