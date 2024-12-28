@@ -136,4 +136,4 @@ public void Add(List<EgeDeniziB> baliklar)
 }
 
 
-// Batu senin ben...
+//Mami senin ben..
