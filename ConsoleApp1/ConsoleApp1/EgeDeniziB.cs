@@ -27,7 +27,18 @@ public class EgeDeniziB
         return BalikAdi;
     }
 
-    
+    public static Dictionary<string, EgeDeniziB> CreateBalikDictionary(List<EgeDeniziB> baliklar)
+    {
+        Dictionary<string, EgeDeniziB> balikDictionary = new Dictionary<string, EgeDeniziB>();
+
+        foreach (var balik in baliklar)
+        {
+            balikDictionary[balik.BalikAdi] = balik;
+        }
+
+        return balikDictionary;
+    }
+
     
     
 }
